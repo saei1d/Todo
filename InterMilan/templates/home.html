@@ -1,0 +1,52 @@
+{% extends 'base2.html' %}
+
+
+{% block content %}
+
+    <div class="menu">
+        <h2>خانه</h2>
+        <p>خوش‌آمدید{{ user.username }}</p>
+        <a href="{% url 'client:edit_profile' %}">ویرایش پروفایل</a>
+        <br>
+        <br>
+        <a href="{% url 'client:logout' %}">logout</a>
+    </div>
+
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div id="myDIV" class="header">
+            <h2 style="margin:5px">My To Do List</h2>
+            <label for="myInput"><input type="text" id="myInput" placeholder="Title..." name="input">
+            </label>
+            <button type="submit" class="addBtn">ADD</button>
+        </div>
+
+
+    </form>
+    <ul id="myUL">
+        {% for m in mmd %}
+            <li>{{ m.title }}</li>
+        {% endfor %}
+
+    </ul>
+    <div style="padding: 50px"><a style="margin-left: 300px" href="{% url 'todo:tasks' %} ">ALL TASKS</a>
+    </div>
+
+
+
+    <ul>
+
+
+        <div>
+            {% for s in users %}
+                <a class="slide" href="{% url 'todo:client_tasks' s.id %}?todo={{ s.id }} ">
+                    <li>{{ s.username }}</li>
+                </a></div>
+            {% endfor %}
+
+    </ul>
+
+
+
+{% endblock %}

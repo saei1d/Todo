@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>ورود</h2>
+    <div class="ff">
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">نام کاربری:
+                <input type="text" name="username" required id="username">
+            </label>
+            <br>
+            <br>
+            <label for="password">رمز عبور:
+                <input type="password" name="password" required id="password">
+            </label>
+            <br>
+            <button type="submit">ورود</button>
+            <div class="second"><a href="{% url 'client:register' %}">register</a></div>
+
+
+        </form>
+    </div>
+{% endblock %}

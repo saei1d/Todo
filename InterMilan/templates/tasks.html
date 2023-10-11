@@ -1,0 +1,57 @@
+{% extends 'base2.html' %}
+
+
+{% block content %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div id="myDIV" class="header">
+            <h2 style="margin:5px">My To Do List</h2>
+            <label for="myInput"><input type="text" id="myInput" placeholder="Title..." name="input">
+            </label>
+            <button type="submit" class="addBtn">ADD</button>
+        </div>
+
+
+    </form>
+
+    {% if msg %}
+        <h3>{{ msg }}</h3>
+    {% endif %}
+    <ul id="todo-list">
+        {% for m in mmd %}
+            <div class="ssr {% if m.done %}done{% endif %}">
+                <li>{{ m.title }}</li>
+                <div class="labelasli">
+                    {% if not m.done %}
+                        <a href="{% url 'todo:tasks' %}?check={{ m.id }}">
+                            <button type="submit">finish task</button>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'todo:tasks' %}?uncheck={{ m.id }}">
+                            <button type="submit">undo task</button>
+                        </a>
+                    {% endif %}
+                </div>
+                <a href="{% url 'todo:tasks' %}?delete={{ m.id }}">
+                    <button class="delete-button">Delete</button>
+                </a>
+            </div>
+        {% endfor %}
+
+    </ul>
+
+
+    {%for mmd in mmdjavad  %}
+        <ul>
+        <li>{{ mmd.title }}</li>
+        </ul>
+
+    {% endfor %}
+
+
+
+
+    <a style="margin-left: 45px" href="{% url 'client:home' %}">BACK</a>
+
+{% endblock %}
